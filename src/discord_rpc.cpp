@@ -81,7 +81,7 @@ static void handle_discord_error(int errcode, const char* message) {
   quit_flag = true;
 }
 
-static void discordInit() {
+static void discord_init() {
   DiscordEventHandlers handlers;
   memset(&handlers, 0, sizeof(handlers));
   handlers.errored = handle_discord_disconnected;
@@ -91,7 +91,7 @@ static void discordInit() {
 
 static void init () {
   start_time = chrono::duration_cast<chrono::seconds>(chrono::system_clock::now().time_since_epoch()).count();
-  discordInit();
+  discord_init();
 
   while(!quit_flag){
     update_discord_presence();
