@@ -5,7 +5,8 @@
 
 using namespace std;
 
-const char* CARS[] = {
+static const char* APP_ID = "811339054011777065";
+static const char* CARS[] = {
   "Peugeot 206 GTI",
   "Ford Focus ZX3",
   "Toyota Corolla GTS",
@@ -39,13 +40,12 @@ const char* CARS[] = {
   "Subaru WRX STI"
 };
 
-static char* PROFILE = (char * )0x0083A9E0;
-static UINT32* CAR = (UINT32 *)0x008021B0;
-static UINT32* MONEY = (UINT32 *)0x00861E74;
+static const char* PROFILE = (char * )0x0083A9E0;
+static const int32_t* CAR = (int32_t *)0x008021B0;
+static const int32_t* MONEY = (int32_t *)0x00861E74;
 
 static int64_t start_time;
-boolean quit_flag = false;
-
+bool quit_flag = false;
 
 static void update_discord_presence () {
   char details[256];
@@ -86,7 +86,7 @@ static void discord_init() {
   memset(&handlers, 0, sizeof(handlers));
   handlers.errored = handle_discord_disconnected;
   handlers.disconnected = handle_discord_error;
-  Discord_Initialize("811339054011777065", &handlers, 1, NULL);
+  Discord_Initialize(APP_ID, &handlers, 1, NULL);
 }
 
 static void init () {
@@ -103,7 +103,7 @@ static void init () {
 }
 
 extern "C" __declspec(dllexport)
-BOOL APIENTRY DllMain (HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
+bool APIENTRY DllMain (HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
   switch (fdwReason) {
     case DLL_PROCESS_ATTACH: {
       thread dummy(init);
@@ -115,5 +115,5 @@ BOOL APIENTRY DllMain (HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
       break;
   }
 
-  return TRUE;
+  return true;
 }
