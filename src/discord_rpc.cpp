@@ -40,7 +40,7 @@ static const char* CARS[] = {
   "Subaru WRX STI"
 };
 
-static const char* PROFILE = (char * )0x0083A9E0;
+static const char* PROFILE = (char *)0x0083A9E0;
 static const int32_t* CAR = (int32_t *)0x008021B0;
 static const int32_t* MONEY = (int32_t *)0x00861E74;
 
@@ -52,10 +52,7 @@ static void update_discord_presence () {
   char profile[16];
 
   sprintf(details, "%s - $%d", *CAR < 0 ? "None" : *CAR > 30 ? "Unknown" : CARS[*CAR] , *MONEY);
-
-  for (char offset = 0; offset < 16; offset++) {
-    profile[offset] = *(PROFILE + offset);
-  }
+  memcpy(profile, PROFILE, 16);
 
   DiscordRichPresence discordPresence;
   memset(&discordPresence, 0, sizeof(discordPresence));
