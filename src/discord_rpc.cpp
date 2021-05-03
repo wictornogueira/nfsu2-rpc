@@ -1,20 +1,22 @@
-#include <thread>
+#include <ctime>
 #include <fstream>
 #include <windows.h>
 #include <discord_rpc.h>
 
+#define APP_ID "811339054011777065"
+#define UPD_INTVL 5000
+
 using namespace std;
 
-static const char* APP_ID = "811339054011777065";
-static const char* CARS[] = {
+static const char* CAR_TABLE [] = {
   "Peugeot 206 GTI",
   "Ford Focus ZX3",
   "Toyota Corolla GTS",
   "Nissan 240SX",
   "Mazda Miata",
   "Honda Civic Coupe Si",
-  "Unknown",
-  "Unknown",
+  "Peugeot 106",
+  "Vauxhall Corsa",
   "Hummer H2",
   "Lincoln Navigator",
   "Cadillac Escalade",
@@ -44,73 +46,64 @@ static const char* PROFILE = (char *)0x0083A9E0;
 static const int32_t* CAR = (int32_t *)0x008021B0;
 static const int32_t* MONEY = (int32_t *)0x00861E74;
 
-static int64_t start_time;
-bool quit_flag = false;
+static const int64_t START_TIME = time(0);
 
 static void update_discord_presence () {
   char details[256];
   char profile[16];
 
-  sprintf(details, "%s - $%d", *CAR < 0 ? "None" : *CAR > 30 ? "Unknown" : CARS[*CAR] , *MONEY);
-  memcpy(profile, PROFILE, 16);
+  sprintf_s(details, 256, "%s - $%d", *CAR < 0 ? "None" : *CAR > 30 ? "Unknown" : CAR_TABLE[*CAR] , *MONEY);
+  memcpy_s(profile, 16, PROFILE, 16);
 
   DiscordRichPresence discordPresence;
   memset(&discordPresence, 0, sizeof(discordPresence));
+
   discordPresence.state = details;
   discordPresence.details = profile;
-  discordPresence.startTimestamp = start_time;
+  discordPresence.startTimestamp = START_TIME;
   discordPresence.largeImageKey = "logo";
   discordPresence.largeImageText = "Need for Speed: Underground 2";
-  discordPresence.instance = 0;
+
   Discord_UpdatePresence(&discordPresence);
 }
 
-static void handle_discord_disconnected(int errcode, const char* message) {
-  quit_flag = true;
-}
-
-static void handle_discord_error(int errcode, const char* message) {
+static void handle_discord_error (int errcode, const char* message) {
   fstream error_file;
   error_file.open("discord-error.log", fstream::out);
   error_file << message;
   error_file.close();
-
-  quit_flag = true;
 }
 
-static void discord_init() {
+static void init_discord () {
   DiscordEventHandlers handlers;
   memset(&handlers, 0, sizeof(handlers));
-  handlers.errored = handle_discord_disconnected;
-  handlers.disconnected = handle_discord_error;
-  Discord_Initialize(APP_ID, &handlers, 1, NULL);
+  handlers.errored = handle_discord_error;
+
+  Discord_Initialize(APP_ID, &handlers, 0, 0);
 }
 
-static void init () {
-  start_time = chrono::duration_cast<chrono::seconds>(chrono::system_clock::now().time_since_epoch()).count();
-  discord_init();
+static DWORD WINAPI ThreadEntry (LPVOID lpParam) {
+  init_discord();
 
-  while(!quit_flag){
+  while (1) {
     update_discord_presence();
     Discord_RunCallbacks();
-    this_thread::sleep_for(chrono::seconds(5));
+    Sleep(UPD_INTVL);
   }
-
-  Discord_Shutdown();
 }
 
 extern "C" __declspec(dllexport)
-bool APIENTRY DllMain (HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
+BOOL APIENTRY DllMain (HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
   switch (fdwReason) {
     case DLL_PROCESS_ATTACH: {
-      thread dummy(init);
-      dummy.detach();
+      DisableThreadLibraryCalls(hinstDLL);
+      CreateThread(0, 0, ThreadEntry, 0, 0, 0);
       break;
     }
     case DLL_PROCESS_DETACH:
-      quit_flag = true;
+      Discord_Shutdown();
       break;
   }
 
-  return true;
+  return 1;
 }
