@@ -6,4 +6,4 @@ A mod that adds Discord Rich Presence integration to Need for Speed: Underground
 
 1. Install ASI loader.
 2. Get the latest version [here](https://github.com/wictornogueira/nfsu2-rpc/releases/latest/download/discord-rpc.zip).
-3. Extract the contents to your game folder.
+3. Extract all files to your game directory.
