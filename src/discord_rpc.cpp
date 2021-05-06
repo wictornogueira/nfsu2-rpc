@@ -1,92 +1,48 @@
 #include <ctime>
-#include <fstream>
+#include <stdio.h>
 #include <windows.h>
 #include <discord_rpc.h>
 
+#include <utils.h>
+
 #define APP_ID "811339054011777065"
+#define IMG_KEY "logo"
+#define IMG_TXT "Need for Speed: Underground 2"
+#define UNK_CAR "Unknown"
 #define UPD_INTVL 5000
 
 using namespace std;
+using namespace utils;
 
-static const char* CAR_TABLE [] = {
-  "Peugeot 206 GTI",
-  "Ford Focus ZX3",
-  "Toyota Corolla GTS",
-  "Nissan 240SX",
-  "Mazda Miata",
-  "Honda Civic Coupe Si",
-  "Peugeot 106",
-  "Vauxhall Corsa",
-  "Hummer H2",
-  "Lincoln Navigator",
-  "Cadillac Escalade",
-  "Hyundai Tiburon GT",
-  "Nissan Sentra SE-R Spec V",
-  "Toyota Celica GT-S",
-  "Lexus iS300",
-  "Toyota Supra",
-  "Volkswagen Golf GTI",
-  "Audi A3",
-  "Acura RSX Type S",
-  "Mitsubishi Eclipse GSX",
-  "Audi TT",
-  "Mazda RX-8",
-  "Nissan 350Z",
-  "Infiniti G35",
-  "Mitsubishi 3000 GT",
-  "Pontiac GTO",
-  "Ford Mustang GT",
-  "Nissan Skyline R34 GTR",
-  "Mitsubishi Lancer EVO VIII",
-  "Mazda RX-7",
-  "Subaru WRX STI"
-};
-
-static const char* PROFILE = (char *)0x0083A9E0;
-static const int32_t* CAR = (int32_t *)0x008021B0;
-static const int32_t* MONEY = (int32_t *)0x00861E74;
-
-static const int64_t START_TIME = time(0);
-
-static void update_discord_presence () {
-  char details[256];
+static void patch_presence (DiscordRichPresence* discord_presence) {
+  char details[128];
   char profile[16];
 
-  sprintf_s(details, 256, "%s - $%d", *CAR < 0 ? "None" : *CAR > 30 ? "Unknown" : CAR_TABLE[*CAR] , *MONEY);
+  if (*CAR < 0) {
+    sprintf_s(details, 128, "$%d", *MONEY);
+  } else {
+    sprintf_s(details, 128, "%s - $%d", *CAR > 30 ? UNK_CAR : CAR_TABLE[*CAR] , *MONEY);
+  }
+
   memcpy_s(profile, 16, PROFILE, 16);
 
-  DiscordRichPresence discordPresence;
-  memset(&discordPresence, 0, sizeof(discordPresence));
-
-  discordPresence.state = details;
-  discordPresence.details = profile;
-  discordPresence.startTimestamp = START_TIME;
-  discordPresence.largeImageKey = "logo";
-  discordPresence.largeImageText = "Need for Speed: Underground 2";
-
-  Discord_UpdatePresence(&discordPresence);
-}
-
-static void handle_discord_error (int errcode, const char* message) {
-  fstream error_file;
-  error_file.open("discord-error.log", fstream::out);
-  error_file << message;
-  error_file.close();
-}
-
-static void init_discord () {
-  DiscordEventHandlers handlers;
-  memset(&handlers, 0, sizeof(handlers));
-  handlers.errored = handle_discord_error;
-
-  Discord_Initialize(APP_ID, &handlers, 0, 0);
+  discord_presence->state = details;
+  discord_presence->details = profile;
 }
 
 static DWORD WINAPI ThreadEntry (LPVOID lpParam) {
-  init_discord();
+  Discord_Initialize(APP_ID, 0, 0, 0);
+
+  DiscordRichPresence discord_presence;
+  memset(&discord_presence, 0, sizeof(discord_presence));
+
+  discord_presence.startTimestamp = time(0);
+  discord_presence.largeImageKey = IMG_KEY;
+  discord_presence.largeImageText = IMG_TXT;
 
   while (1) {
-    update_discord_presence();
+    patch_presence(&discord_presence);
+    Discord_UpdatePresence(&discord_presence);
     Discord_RunCallbacks();
     Sleep(UPD_INTVL);
   }
@@ -95,11 +51,10 @@ static DWORD WINAPI ThreadEntry (LPVOID lpParam) {
 extern "C" __declspec(dllexport)
 BOOL APIENTRY DllMain (HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
   switch (fdwReason) {
-    case DLL_PROCESS_ATTACH: {
+    case DLL_PROCESS_ATTACH:
       DisableThreadLibraryCalls(hinstDLL);
       CreateThread(0, 0, ThreadEntry, 0, 0, 0);
       break;
-    }
     case DLL_PROCESS_DETACH:
       Discord_Shutdown();
       break;
