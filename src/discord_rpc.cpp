@@ -14,23 +14,10 @@
 using namespace std;
 using namespace utils;
 
-static void patch_presence (DiscordRichPresence* discord_presence) {
-  char details[128];
-  char profile[16];
-
-  if (*CAR < 0) {
-    sprintf_s(details, 128, "$%d", *MONEY);
-  } else {
-    sprintf_s(details, 128, "%s - $%d", *CAR > 30 ? UNK_CAR : CAR_TABLE[*CAR] , *MONEY);
-  }
-
-  memcpy_s(profile, 16, PROFILE, 16);
-
-  discord_presence->state = details;
-  discord_presence->details = profile;
-}
-
 static DWORD WINAPI ThreadEntry (LPVOID lpParam) {
+  char state[64];
+  char details[16];
+  
   Discord_Initialize(APP_ID, 0, 0, 0);
 
   DiscordRichPresence discord_presence;
@@ -40,8 +27,15 @@ static DWORD WINAPI ThreadEntry (LPVOID lpParam) {
   discord_presence.largeImageKey = IMG_KEY;
   discord_presence.largeImageText = IMG_TXT;
 
+  discord_presence.state = state;
+  discord_presence.details = details;
+
   while (1) {
-    patch_presence(&discord_presence);
+    (*CAR < 0)  ? sprintf_s(state, 64, "$%d", *MONEY)
+                : sprintf_s(state, 64, "%s - $%d", *CAR > 30 ? UNK_CAR : CAR_TABLE[*CAR] , *MONEY);
+
+    memcpy_s(details, 16, PROFILE, 16);
+
     Discord_UpdatePresence(&discord_presence);
     Discord_RunCallbacks();
     Sleep(UPD_INTVL);
