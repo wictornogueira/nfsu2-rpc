@@ -3,7 +3,7 @@ New-Item -ItemType Directory -Force -Path "build\scripts" | Out-Null
 New-Item -ItemType Directory -Force -Path "dist\" | Out-Null
 
 # Compile
-& i686-w64-mingw32-g++.exe -I src\ -I include\ -L lib\ -shared -o build\scripts\discord-rpc.asi src\discord_rpc.cpp -l discord-rpc
+& i686-w64-mingw32-g++.exe -static-libgcc -mthreads -I src\ -I include\ -L lib\ -shared -o build\scripts\discord-rpc.asi src\discord_rpc.cpp -l discord-rpc
 
 if (!$LastExitCode) {
   # Copy discord-rpc.dll
