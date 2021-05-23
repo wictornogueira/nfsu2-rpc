@@ -1,11 +1,11 @@
 #include <stdint.h>
 
 namespace utils {
-  const char* PROFILE = (char *)0x0083A9E0;
-  const int32_t* CAR = (int32_t *)0x008021B0;
-  const int32_t* MONEY = (int32_t *)0x00861E74;
+  const char*     const PROFILE_PTR = (char *)    0x0083A9E0;
+  const int32_t*  const CAR_PTR     = (int32_t *) 0x008021B0;
+  const int32_t*  const MONEY_PTR   = (int32_t *) 0x00861E74;
 
-  const char* CAR_TABLE [] = {
+  const char* const CAR_TABLE [] = {
     "Peugeot 206 GTI",
     "Ford Focus ZX3",
     "Toyota Corolla GTS",

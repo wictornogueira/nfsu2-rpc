@@ -3,13 +3,8 @@
 #include <windows.h>
 #include <discord_rpc.h>
 
+#include <config.h>
 #include <utils.h>
-
-#define APP_ID "811339054011777065"
-#define IMG_KEY "logo"
-#define IMG_TXT "Need for Speed: Underground 2"
-#define UNK_CAR "Unknown"
-#define UPD_INTVL 5000
 
 using namespace std;
 using namespace utils;
@@ -31,10 +26,10 @@ static DWORD WINAPI ThreadEntry (LPVOID lpParam) {
   discord_presence.details = details;
 
   while (1) {
-    (*CAR < 0)  ? sprintf_s(state, 64, "$%d", *MONEY)
-                : sprintf_s(state, 64, "%s - $%d", *CAR > 30 ? UNK_CAR : CAR_TABLE[*CAR] , *MONEY);
+    (*CAR_PTR < 0)  ? sprintf_s(state, 64, "$%d", *MONEY_PTR)
+                    : sprintf_s(state, 64, "%s - $%d", *CAR_PTR > 30 ? UNK_CAR : CAR_TABLE[*CAR_PTR] , *MONEY_PTR);
 
-    memcpy_s(details, 16, PROFILE, 16);
+    memcpy_s(details, 16, PROFILE_PTR, 16);
 
     Discord_UpdatePresence(&discord_presence);
     Discord_RunCallbacks();
