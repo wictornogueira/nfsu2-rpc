@@ -15,7 +15,7 @@ if ($c) {
 New-Item -ItemType Directory -Force -Path "build\scripts" | Out-Null
 
 # Compile
-& i686-w64-mingw32-g++.exe -static-libgcc -mthreads -I src\ -I include\ -L lib\ -l discord-rpc -shared -o build\scripts\nfsu2-rpc.asi src\discord_rpc.cpp
+& i686-w64-mingw32-g++.exe -static-libgcc -static-libstdc++ -mthreads -I src\ -I include\ -L lib\ -l discord-rpc -shared -o build\scripts\nfsu2-rpc.asi src\discord_rpc.cpp
 
 if (!$LastExitCode) {
   Write-Output "Built successfully."
