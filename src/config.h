@@ -4,6 +4,7 @@
 #define UPD_INTVL 5000
 
 #define UNK_CAR "Unknown"
+#define UNK_TRACK "Unknown"
 
 #define IN_MENU "Main Menu" // ANY menu
 #define IN_LOBBY "Lan Lobby"

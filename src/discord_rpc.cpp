@@ -61,11 +61,13 @@ static DWORD WINAPI ThreadEntry (LPVOID lpParam) {
             mode = GM_UNKNOWN;
         }
 
-        sprintf_s(details, 64, (*LBBY_NAME_PTR == 0) ? "%s - %s" : "%s - %s (LAN)", mode, TRACK_TABLE[*C_TRACK_PTR]);
+        const auto trackITR = TRACK_TABLE.find(*C_TRACK_PTR);
+        sprintf_s(details, 64, (*LBBY_NAME_PTR == 0) ? "%s - %s" : "%s - %s (LAN)", mode, trackITR != TRACK_TABLE.end() ? trackITR->second : UNK_TRACK);
       }
     }
-    
-    sprintf_s(state, 64, (*C_CAR_PTR < 0) ? "" : "%s", *C_CAR_PTR > 30 ? UNK_CAR : CAR_TABLE[*C_CAR_PTR]);
+
+    const auto carITR = CAR_TABLE.find(*C_CAR_PTR);
+    sprintf_s(state, 64, (*C_CAR_PTR < 0) ? "" : "%s", carITR != CAR_TABLE.end() ? carITR->second : UNK_CAR);
 
     Discord_UpdatePresence(&discord_presence);
     Discord_RunCallbacks();

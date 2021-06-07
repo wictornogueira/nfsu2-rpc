@@ -8,38 +8,51 @@ namespace utils {
   const int32_t*  const C_CAR_PTR     = (int32_t *) 0x008021B0;
   const int32_t*  const C_TRACK_PTR   = (int32_t *) 0x0089E7A0;
 
-  const char* const CAR_TABLE [] = {
-    "Peugeot 206 GTI",
-    "Ford Focus ZX3",
-    "Toyota Corolla GTS",
-    "Nissan 240SX",
-    "Mazda Miata",
-    "Honda Civic Coupe Si",
-    "Peugeot 106",
-    "Vauxhall Corsa",
-    "Hummer H2",
-    "Lincoln Navigator",
-    "Cadillac Escalade",
-    "Hyundai Tiburon GT",
-    "Nissan Sentra SE-R Spec V",
-    "Toyota Celica GT-S",
-    "Lexus iS300",
-    "Toyota Supra",
-    "Volkswagen Golf GTI",
-    "Audi A3",
-    "Acura RSX Type S",
-    "Mitsubishi Eclipse GSX",
-    "Audi TT",
-    "Mazda RX-8",
-    "Nissan 350Z",
-    "Infiniti G35",
-    "Mitsubishi 3000 GT",
-    "Pontiac GTO",
-    "Ford Mustang GT",
-    "Nissan Skyline R34 GTR",
-    "Mitsubishi Lancer EVO VIII",
-    "Mazda RX-7",
-    "Subaru WRX STI"
+  std::unordered_map<short, const char*> CAR_TABLE = {
+    // Vanilla
+
+    {0, "Peugeot 206 GTI"},
+    {1, "Ford Focus ZX3"},
+    {2, "Toyota Corolla GTS"},
+    {3, "Nissan 240SX"},
+    {4, "Mazda Miata"},
+    {5, "Honda Civic Coupe Si"},
+    {6, "Peugeot 106"},
+    {7, "Vauxhall Corsa"},
+    {8, "Hummer H2"},
+    {9, "Lincoln Navigator"},
+    {10, "Cadillac Escalade"},
+    {11, "Hyundai Tiburon GT"},
+    {12, "Nissan Sentra SE-R Spec V"},
+    {13, "Toyota Celica GT-S"},
+    {14, "Lexus iS300"},
+    {15, "Toyota Supra"},
+    {16, "Volkswagen Golf GTI"},
+    {17, "Audi A3"},
+    {18, "Acura RSX Type S"},
+    {19, "Mitsubishi Eclipse GSX"},
+    {20, "Audi TT"},
+    {21, "Mazda RX-8"},
+    {22, "Nissan 350Z"},
+    {23, "Infiniti G35"},
+    {24, "Mitsubishi 3000 GT"},
+    {25, "Pontiac GTO"},
+    {26, "Ford Mustang GT"},
+    {27, "Nissan Skyline R34 GTR"},
+    {28, "Mitsubishi Lancer EVO VIII"},
+    {29, "Mazda RX-7"},
+    {30, "Subaru WRX STI"},
+
+    // Olympic Imports
+
+    {46, "Subaru Impreza RS"},
+    {47, "Acura Integra Type R"},
+    {48, "Mitsubishi Lancer ES"},
+    {49, "Dodge Neon"},
+    {50, "Acura NSX"},
+    {51, "Honda S2000"},
+    {52, "Lock"},                  // why? ;-;
+    {53, "Dodge Charger R/T"},
   };
 
   std::unordered_map<short, const char*> TRACK_TABLE = {
@@ -173,6 +186,6 @@ namespace utils {
     {4713, "Airport Circuit Track 3"},
     {4714, "Airport Circuit Track 4"},
     {4715, "Airport Circuit Track 5"},
-    {4716, "Airport Circuit Track 6"}
+    {4716, "Airport Circuit Track 6"},
   };
 }
