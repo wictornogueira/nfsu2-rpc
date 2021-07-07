@@ -2,6 +2,8 @@
 
 A mod that adds Discord Rich Presence integration to Need for Speed: Underground 2.  
 
+<img align="center" src="assets/presence.png">  
+
 ## Installation
 
 1. Install ASI loader.
