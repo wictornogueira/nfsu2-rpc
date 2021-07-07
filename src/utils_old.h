@@ -1,58 +1,58 @@
+#include <stdint.h>
 #include <unordered_map>
 
 namespace utils {
-  const char* const PRF_NAME_PTR  = (char *)  0x0083A9E0; // 15 byte-long
-  const char* const LBBY_NAME_PTR = (char *)  0x0086A3D8; // 12 byte-long
-  const int*  const BAL_PTR       = (int *)   0x00861E74;
-  const int*  const C_CAR_PTR     = (int *)   0x008021B0;
-  const int*  const C_TRACK_PTR   = (int *)   0x0089E7A0;
-  const int*  const CARS_ADDR_PTR = (int *)   0x008A1CCC;
+  const char*     const PRF_NAME_PTR  = (char *)    0x0083A9E0; // 15 byte-long
+  const char*     const LBBY_NAME_PTR = (char *)    0x0086A3D8; // 12 byte-long
+  const int32_t*  const BAL_PTR       = (int32_t *) 0x00861E74;
+  const int32_t*  const C_CAR_PTR     = (int32_t *) 0x008021B0;
+  const int32_t*  const C_TRACK_PTR   = (int32_t *) 0x0089E7A0;
 
-  std::unordered_map<std::string, const char*> CAR_TABLE = {
+  std::unordered_map<short, const char*> CAR_TABLE = {
     // Vanilla
 
-    {"PEUGOT", "Peugeot 206 GTI"},
-    {"FOCUS", "Ford Focus ZX3"},
-    {"COROLLA", "Toyota Corolla GTS"},
-    {"240SX", "Nissan 240SX"},
-    {"MIATA", "Mazda Miata"},
-    {"CIVIC", "Honda Civic Coupe Si"},
-    {"PEUGOT106", "Peugeot 106"},
-    {"CORSA", "Vauxhall Corsa"},
-    {"HUMMER", "Hummer H2"},
-    {"NAVIGATOR", "Lincoln Navigator"},
-    {"ESCALADE", "Cadillac Escalade"},
-    {"TIBURON", "Hyundai Tiburon GT"},
-    {"SENTRA", "Nissan Sentra SE-R Spec V"},
-    {"CELICA", "Toyota Celica GT-S"},
-    {"IS300", "Lexus iS300"},
-    {"SUPRA", "Toyota Supra"},
-    {"GOLF", "Volkswagen Golf GTI"},
-    {"A3", "Audi A3"},
-    {"RSX", "Acura RSX Type S"},
-    {"ECLIPSE", "Mitsubishi Eclipse GSX"},
-    {"TT", "Audi TT"},
-    {"RX8", "Mazda RX-8"},
-    {"350Z", "Nissan 350Z"},
-    {"G35", "Infiniti G35"},
-    {"300GT", "Mitsubishi 3000 GT"},
-    {"GTO", "Pontiac GTO"},
-    {"MUSTANGGT", "Ford Mustang GT"},
-    {"SKYLINE", "Nissan Skyline R34 GTR"},
-    {"LANCEREVO8", "Mitsubishi Lancer EVO VIII"},
-    {"RX7", "Mazda RX-7"},
-    {"IMPREZAWRX", "Subaru WRX STI"},
+    {0, "Peugeot 206 GTI"},
+    {1, "Ford Focus ZX3"},
+    {2, "Toyota Corolla GTS"},
+    {3, "Nissan 240SX"},
+    {4, "Mazda Miata"},
+    {5, "Honda Civic Coupe Si"},
+    {6, "Peugeot 106"},
+    {7, "Vauxhall Corsa"},
+    {8, "Hummer H2"},
+    {9, "Lincoln Navigator"},
+    {10, "Cadillac Escalade"},
+    {11, "Hyundai Tiburon GT"},
+    {12, "Nissan Sentra SE-R Spec V"},
+    {13, "Toyota Celica GT-S"},
+    {14, "Lexus iS300"},
+    {15, "Toyota Supra"},
+    {16, "Volkswagen Golf GTI"},
+    {17, "Audi A3"},
+    {18, "Acura RSX Type S"},
+    {19, "Mitsubishi Eclipse GSX"},
+    {20, "Audi TT"},
+    {21, "Mazda RX-8"},
+    {22, "Nissan 350Z"},
+    {23, "Infiniti G35"},
+    {24, "Mitsubishi 3000 GT"},
+    {25, "Pontiac GTO"},
+    {26, "Ford Mustang GT"},
+    {27, "Nissan Skyline R34 GTR"},
+    {28, "Mitsubishi Lancer EVO VIII"},
+    {29, "Mazda RX-7"},
+    {30, "Subaru WRX STI"},
 
     // Olympic Imports
 
-    {"IMPREZA", "Subaru Impreza RS"},
-    {"INTEGRA", "Acura Integra Type R"},
-    {"LANCER", "Mitsubishi Lancer ES"},
-    {"NEONC", "Dodge Neon"},
-    {"NSX", "Acura NSX"},
-    {"S2000", "Honda S2000"},
-    {"LOCK", "Lock"},                  // why? ;-;
-    {"CHARGER", "Dodge Charger R/T"},
+    {46, "Subaru Impreza RS"},
+    {47, "Acura Integra Type R"},
+    {48, "Mitsubishi Lancer ES"},
+    {49, "Dodge Neon"},
+    {50, "Acura NSX"},
+    {51, "Honda S2000"},
+    {52, "Lock"},                  // why? ;-;
+    {53, "Dodge Charger R/T"},
   };
 
   std::unordered_map<short, const char*> TRACK_TABLE = {
