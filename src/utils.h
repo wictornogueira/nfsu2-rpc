@@ -1,12 +1,12 @@
 #include <unordered_map>
 
 namespace utils {
-  const char* const PRF_NAME_PTR  = (char *)  0x0083A9E0; // 15 byte-long
-  const char* const LBBY_NAME_PTR = (char *)  0x0086A3D8; // 12 byte-long
-  const int*  const BAL_PTR       = (int *)   0x00861E74;
-  const int*  const C_CAR_PTR     = (int *)   0x008021B0;
-  const int*  const C_TRACK_PTR   = (int *)   0x0089E7A0;
-  const int*  const CARS_ADDR_PTR = (int *)   0x008A1CCC;
+  const char* const PRF_NAME_PTR  = (char*) 0x0083A9E0; // 15 byte-long
+  const char* const LBBY_NAME_PTR = (char*) 0x0086A3D8; // 12 byte-long
+  const int*  const BAL_PTR       = (int*)  0x00861E74;
+  const int*  const C_CAR_PTR     = (int*)  0x008021B0;
+  const int*  const C_TRACK_PTR   = (int*)  0x0089E7A0;
+  const int*  const CARS_ADDR_PTR = (int*)  0x008A1CCC;
 
   std::unordered_map<std::string, const char*> CAR_TABLE = {
     // Vanilla
@@ -35,7 +35,7 @@ namespace utils {
     {"RX8", "Mazda RX-8"},
     {"350Z", "Nissan 350Z"},
     {"G35", "Infiniti G35"},
-    {"300GT", "Mitsubishi 3000 GT"},
+    {"3000GT", "Mitsubishi 3000 GT"},
     {"GTO", "Pontiac GTO"},
     {"MUSTANGGT", "Ford Mustang GT"},
     {"SKYLINE", "Nissan Skyline R34 GTR"},
