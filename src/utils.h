@@ -11,7 +11,7 @@ namespace utils {
   std::unordered_map<std::string, const char*> CAR_TABLE = {
     // Vanilla
 
-    {"PEUGOT", "Peugeot 206 GTI"},
+    {"PEUGOT", "Peugeot 206 GTi"},
     {"FOCUS", "Ford Focus ZX3"},
     {"COROLLA", "Toyota Corolla GTS"},
     {"240SX", "Nissan 240SX"},
@@ -38,7 +38,7 @@ namespace utils {
     {"3000GT", "Mitsubishi 3000 GT"},
     {"GTO", "Pontiac GTO"},
     {"MUSTANGGT", "Ford Mustang GT"},
-    {"SKYLINE", "Nissan Skyline R34 GTR"},
+    {"SKYLINE", "Nissan Skyline R34 GT-R"},
     {"LANCEREVO8", "Mitsubishi Lancer EVO VIII"},
     {"RX7", "Mazda RX-7"},
     {"IMPREZAWRX", "Subaru WRX STI"},
