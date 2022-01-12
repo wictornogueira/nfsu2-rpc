@@ -1,6 +1,13 @@
 {
     "activity": {
-        "state": "$car$",
+        "state": {
+            "inmenu": "",
+            "tuning": "$car$",
+		    "racing": "$car$",
+            "inlobby": "",
+		    "loading": "",
+		    "exploring": "$car$"
+        },
         "details": {
             "inmenu": "Main Menu",
             "tuning": "Tuning",

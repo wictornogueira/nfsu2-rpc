@@ -7,10 +7,7 @@ namespace {
 }
 
 void mainLoopHook() {
-  GameState state = getGameState();
-
-#ifdef FRAME_SKIP
-#if FRAME_SKIP != 0
+#if FRAME_SKIP > 0
 
   static size_t skippedFrames = 0;
 
@@ -22,10 +19,9 @@ void mainLoopHook() {
   skippedFrames = 0;
 
 #endif
-#endif
 
-  activity.SetState(langManager.getStateString(state, (*C_CAR_PTR)).c_str());
-  activity.SetDetails(langManager.getDetailsString(state, (*C_TRACK_PTR)).c_str());
+  activity.SetState(langManager.getStateString().c_str());
+  activity.SetDetails(langManager.getDetailsString().c_str());
 
   core->ActivityManager().UpdateActivity(activity, [](discord::Result result) {});
 
@@ -53,9 +49,8 @@ void init(HMODULE hModule) {
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
-  switch (ul_reason_for_call) {
-    case DLL_PROCESS_ATTACH:
-      init(hModule);
+  if (ul_reason_for_call == DLL_PROCESS_ATTACH) {
+    init(hModule);
   }
 
   return TRUE;

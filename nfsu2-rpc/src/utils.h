@@ -33,8 +33,8 @@ enum class GameMode {
 };
 
 struct CarInfo {
-  char* name;
-  char* brand;
+  const char* name;
+  const char* brand;
 };
 
 void initConsole();
@@ -42,9 +42,12 @@ void makeCall(int at, void* to);
 wstring getModulePath(HMODULE hModule);
 json buildLangJsonObj(HMODULE hModule, LPWSTR lpName);
 string replaceAll(const string& str, const string& searchValue, const string& newValue);
-string replaceAll(string& str, string& searchValue, string& newValue);
-string capitalizeString(string& str);
+string capitalizeString(const string& str);
 string getGameString(const string& str);
 GameState getGameState();
-GameMode guessGameMode(int trackId);
-CarInfo getCarInfo(int carId);
+GameMode guessGameMode(int trackId = (*C_TRACK_PTR));
+CarInfo getCarInfo(int carId = (*C_CAR_PTR));
+string getTrack();
+string getProfileName();
+string getLobbyName();
+string getBalance();

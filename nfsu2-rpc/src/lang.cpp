@@ -1,7 +1,5 @@
 #include "lang.h"
 
-bool once = true;
-
 LangManager::LangManager(json &lJson) {
   langJson = lJson;
 }
@@ -23,12 +21,11 @@ string LangManager::getString(const string &str) {
   3. Uses name and brand extracted from carTypeInfo
 */
 
-string LangManager::getCarName(int carId) {
-  if (carId < 0) {
-    return "SUS";
+string LangManager::getCarName(CarInfo carInfo) {
+  if (!carInfo.name) {
+    return "";
   }
 
-  CarInfo carInfo = getCarInfo(carId);
   string carTypeName = string(carInfo.name);
   string carFullName = getString("/cars/" + carTypeName);
 
@@ -49,10 +46,8 @@ string LangManager::getCarName(int carId) {
   2. Uses trackId
 */
 
-string LangManager::getTrackName(int trackId) {
-  string strTrackId = to_string(trackId);
+string LangManager::getTrackName(const string &strTrackId) {
   string trackName = getGameString("TRACK_NAME_" + strTrackId);
-
   return trackName.length() ? trackName : strTrackId;
 }
 
@@ -66,30 +61,51 @@ string LangManager::getGameModeName(GameMode gameMode) {
 }
 
 /*
-  TODO: Make this return something other than what car is currently being driven
+  1. Checks JSON
 */
 
-string LangManager::getStateString(GameState state, int carId) {
-  return (int)state > 1 ?
-          replaceAll(getString("/activity/state"), "$car$", getCarName(carId)) :
-          "";
+string LangManager::getDetailsTemplate(GameState gameState) {
+  static const char* gameStateKeys[] = { "loading", "inmenu", "racing", "tuning", "exploring" };
+  return getString(string("/activity/details/") + gameStateKeys[(int)gameState]);
 }
 
 /*
-  TODO: Make it more customizable
+  1. Checks JSON
 */
 
-string LangManager::getDetailsString(GameState state, int trackId) {
+string LangManager::getStateTemplate(GameState gameState) {
   static const char* gameStateKeys[] = { "loading", "inmenu", "racing", "tuning", "exploring" };
-  string detail = getString(string("/activity/details/") + gameStateKeys[(int)state]);
+  return getString(string("/activity/state/") + gameStateKeys[(int)gameState]);
+}
 
-  if (state == GameState::Racing) {
-    detail = replaceAll(
-      replaceAll(detail, "$gamemode$", getGameModeName(guessGameMode(trackId))),
-      "$track$",
-      getTrackName(trackId)
-    );
-  }
+/*
+  TODO: Optimize
+*/
 
-  return detail;
+/*
+  This is kinda ridiculous
+*/
+
+string LangManager::replaceAllPlaceHolders(const string &str) {
+    return replaceAll(
+      replaceAll(
+        replaceAll(
+          replaceAll(
+            replaceAll(
+              replaceAll(
+                str,
+                "$lobby$", getLobbyName()),
+              "$profile$", getProfileName()),
+            "$balance$", getBalance()),
+          "$gamemode$", getGameModeName()),
+        "$track$", getTrackName()),
+      "$car$", getCarName());
+}
+
+string LangManager::getStateString() {
+  return replaceAllPlaceHolders(getStateTemplate());
+}
+
+string LangManager::getDetailsString() {
+  return replaceAllPlaceHolders(getDetailsTemplate());
 }

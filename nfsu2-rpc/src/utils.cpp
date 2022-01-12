@@ -74,7 +74,7 @@ string replaceAll(const string& str, const string& searchValue, const string& ne
   return str;
 }
 
-string capitalizeString(string& str) {
+string capitalizeString(const string& str) {
   string copy = str;
   copy[0] = (char)toupper(copy[0]);
   for (size_t i = 1; i < copy.length(); i++) {
@@ -83,22 +83,13 @@ string capitalizeString(string& str) {
   return copy;
 }
 
-//
-
-string getCarBrand(int carId) {
-  char* addr = (char*)(*CARS_ADDR_PTR + 0xC0 + (carId * 0x890));
-  return addr;
-}
+// Game utils
 
 string getGameString(const string &str) {
   unsigned int hash = csHash((char*)str.c_str());
   char* langString = getLangString(hash);
-
-  return strcmp(langString, "FENG:") ? langString : "";
-  // return (langString == nullptr) ? "" : langString;
+  return strncmp(langString, "FENG:", 5) ? langString : "";
 }
-
-//
 
 GameState getGameState() {
   switch (*SOME_STATE) {
@@ -136,6 +127,26 @@ GameMode guessGameMode(int trackId) {
 }
 
 CarInfo getCarInfo(int carId) {
+  if (carId < 0) {
+    return {};
+  }
+
   char* carData = getCarData(carId);
   return { carData, carData + 0xC0 };
+}
+
+string getTrack() {
+  return to_string(*C_TRACK_PTR);
+}
+
+string getProfileName() {
+  return PRF_NAME_PTR;
+}
+
+string getLobbyName() {
+  return LBBY_NAME_PTR;
+}
+
+string getBalance() {
+  return to_string(*BAL_PTR);
 }

@@ -17,17 +17,21 @@ class LangManager {
   public:
     LangManager();
     LangManager(json &lJson);
-
     void setJson(json &lJson);
 
-    string getString(string &str);
     string getString(const string& str);
 
-    string getCarName(int carId);
-    string getTrackName(int trackId);
-    string getGameModeName(GameMode);
+    string getCarName(CarInfo carInfo = getCarInfo());
+    string getTrackName(const string& strTrackId = getTrack());
+    string getGameModeName(GameMode gameMode = guessGameMode());
 
-    string getStateString(GameState state, int carId);
-    string getDetailsString(GameState state, int trackId);
+    string getDetailsTemplate(GameState gameState = getGameState());
+    string getStateTemplate(GameState gameState = getGameState());
+
+    string getStateString();
+    string getDetailsString();
+
+
+    string replaceAllPlaceHolders(const string& str);
 };
 
