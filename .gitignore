@@ -1,4 +1,5 @@
 .vscode
-debug
-build
+.vs
 dist
+bin
+temp.txt

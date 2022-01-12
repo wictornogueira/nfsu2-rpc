@@ -1,0 +1,65 @@
+{
+    "activity": {
+        "state": "$car$",
+        "details": {
+            "inmenu": "Main Menu",
+            "tuning": "Tuning",
+		    "racing": "$gamemode$ - $track$",
+            "inlobby": "Lan Lobby",
+		    "loading": "Loading",
+		    "exploring": "Exploring"
+        }
+    },
+	"gamemodes": {
+		"url": "URL",
+		"drag": "Drag",
+		"drift": "Drift",
+		"sprint": "Sprint",
+		"circuit": "Circuit",
+        "unknown": "Unknown",
+		"streetx": "Street X",
+        "explorer": "Explorer Mode"
+	},
+	"cars": {
+	    "PEUGOT": "Peugeot 206 GTi",
+        "FOCUS": "Ford Focus ZX3",
+        "COROLLA": "Toyota Corolla GTS",
+        "240SX": "Nissan 240SX",
+        "MIATA": "Mazda Miata",
+        "CIVIC": "Honda Civic Coupe Si",
+        "PEUGOT106": "Peugeot 106",
+        "CORSA": "Vauxhall Corsa",
+        "HUMMER": "Hummer H2",
+        "NAVIGATOR": "Lincoln Navigator",
+        "ESCALADE": "Cadillac Escalade",
+        "TIBURON": "Hyundai Tiburon GT",
+        "SENTRA": "Nissan Sentra SE-R Spec V",
+        "CELICA": "Toyota Celica GT-S",
+        "IS300": "Lexus iS300",
+        "SUPRA": "Toyota Supra",
+        "GOLF": "Volkswagen Golf GTI",
+        "A3": "Audi A3",
+        "RSX": "Acura RSX Type S",
+        "ECLIPSE": "Mitsubishi Eclipse GSX",
+        "TT": "Audi TT",
+        "RX8": "Mazda RX-8",
+        "350Z": "Nissan 350Z",
+        "G35": "Infiniti G35",
+        "3000GT": "Mitsubishi 3000 GT",
+        "GTO": "Pontiac GTO",
+        "MUSTANGGT": "Ford Mustang GT",
+        "SKYLINE": "Nissan Skyline R34 GT-R",
+        "LANCEREVO8": "Mitsubishi Lancer EVO VIII",
+        "RX7": "Mazda RX-7",
+        "IMPREZAWRX": "Subaru WRX STI",
+
+        "IMPREZA": "Subaru Impreza RS",
+        "INTEGRA": "Acura Integra Type R",
+        "LANCER": "Mitsubishi Lancer ES",
+        "NEONC": "Dodge Neon",
+        "NSX": "Acura NSX",
+        "S2000": "Honda S2000",
+        "LOCK": "Lock",
+        "CHARGER": "Dodge Charger R/T"
+	}
+}
