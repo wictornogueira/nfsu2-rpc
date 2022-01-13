@@ -3,32 +3,32 @@
         "state": {
             "inmenu": "",
             "tuning": "$car$",
-		    "racing": "$car$",
+            "racing": "$car$",
             "inlobby": "",
-		    "loading": "",
-		    "exploring": "$car$"
+            "loading": "",
+            "exploring": "$car$"
         },
         "details": {
             "inmenu": "Main Menu",
             "tuning": "Tuning",
-		    "racing": "$gamemode$ - $track$",
+            "racing": "$gamemode$ - $track$",
             "inlobby": "Lan Lobby",
-		    "loading": "Loading",
-		    "exploring": "Exploring"
+            "loading": "Loading",
+            "exploring": "Exploring"
         }
     },
-	"gamemodes": {
-		"url": "URL",
-		"drag": "Drag",
-		"drift": "Drift",
-		"sprint": "Sprint",
-		"circuit": "Circuit",
+    "gamemodes": {
+        "url": "URL",
+        "drag": "Drag",
+        "drift": "Drift",
+        "sprint": "Sprint",
+        "circuit": "Circuit",
         "unknown": "Unknown",
-		"streetx": "Street X",
+        "streetx": "Street X",
         "explorer": "Explorer Mode"
-	},
-	"cars": {
-	    "PEUGOT": "Peugeot 206 GTi",
+    },
+    "cars": {
+        "PEUGOT": "Peugeot 206 GTi",
         "FOCUS": "Ford Focus ZX3",
         "COROLLA": "Toyota Corolla GTS",
         "240SX": "Nissan 240SX",
@@ -68,5 +68,5 @@
         "S2000": "Honda S2000",
         "LOCK": "Lock",
         "CHARGER": "Dodge Charger R/T"
-	}
+    }
 }
