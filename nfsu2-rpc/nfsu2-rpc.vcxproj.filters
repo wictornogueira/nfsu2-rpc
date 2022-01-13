@@ -148,8 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\defaultLang.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="temp.txt" />
+    <None Include="build.ps1" />
   </ItemGroup>
 </Project>

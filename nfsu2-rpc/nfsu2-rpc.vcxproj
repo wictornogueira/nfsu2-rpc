@@ -97,6 +97,10 @@
       <AdditionalLibraryDirectories>lib</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
+    <PostBuildEvent>
+      <Command>Powershell.exe -file "$(SolutionDir)build.ps1" -d</Command>
+      <Message>Running post-build script</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\lang.cpp" />
@@ -147,10 +151,8 @@
     <ResourceCompile Include="nfsu2-rpc.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="build.ps1" />
     <None Include="resources\defaultLang.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="temp.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
