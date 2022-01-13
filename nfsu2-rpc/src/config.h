@@ -6,4 +6,4 @@
 #define IMG_KEY "logo"
 #define IMG_TXT "Need for Speed: Underground 2"
 
-#define LANG_PACK_FILENAME L"/NFSU2-RPC_LangPack.json"
+#define LANG_PACK_FILENAME L"/nfsu2-rpc_lang.json"
