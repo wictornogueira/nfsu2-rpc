@@ -48,9 +48,16 @@ void init(HMODULE hModule) {
   } catch (exception e) {}
 }
 
+// Prevents game from going kaboom
+static DWORD WINAPI ThreadEntry(LPVOID lpParam) {
+  init((HMODULE)lpParam);
+  return 0;
+}
+
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
   if (ul_reason_for_call == DLL_PROCESS_ATTACH) {
-    init(hModule);
+    DisableThreadLibraryCalls(hModule);
+    CreateThread(0, 0, ThreadEntry, hModule, 0, 0);
   }
 
   return TRUE;
