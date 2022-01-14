@@ -12,4 +12,4 @@ A mod that adds Discord Rich Presence integration to Need for Speed: Underground
 
 ## Credits
 - Logo by [TripleZet](https://www.deviantart.com/triplezet)
-- Thanks to [yugecin](https://github.com/yugecin) for reversing engineering the language system
+- Thanks to [yugecin](https://github.com/yugecin) for reverse engineering the language system
