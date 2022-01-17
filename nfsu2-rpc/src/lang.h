@@ -12,26 +12,29 @@ using json = nlohmann::json;
 */
 
 class LangManager {
-  private:
-    json langJson;
   public:
-    LangManager();
-    LangManager(json &lJson);
-    void setJson(json &lJson);
+    static LangManager& getInstance();
 
-    string getString(const string& str);
+  private:
+    LangManager();
 
     string getCarName(CarInfo carInfo = getCarInfo());
     string getTrackName(const string& strTrackId = getTrack());
     string getGameModeName(GameMode gameMode = guessGameMode());
-
     string getDetailsTemplate(GameState gameState = getGameState());
     string getStateTemplate(GameState gameState = getGameState());
+    string replaceAllPlaceHolders(const string& str);
 
+  private:
+    json m_jsonObj;
+
+  public:
+    LangManager(LangManager const&) = delete;
+    void operator=(LangManager const&) = delete;
+
+    void update(json j);
+    string getString(const string& str);
     string getStateString();
     string getDetailsString();
-
-
-    string replaceAllPlaceHolders(const string& str);
 };
 

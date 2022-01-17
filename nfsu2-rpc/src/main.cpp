@@ -3,7 +3,6 @@
 namespace {
   discord::Core* core{};
   discord::Activity activity{};
-  LangManager langManager;
 }
 
 void mainLoopHook() {
@@ -20,8 +19,8 @@ void mainLoopHook() {
 
 #endif
 
-  activity.SetState(langManager.getStateString().c_str());
-  activity.SetDetails(langManager.getDetailsString().c_str());
+  activity.SetState(LangManager::getInstance().getStateString().c_str());
+  activity.SetDetails(LangManager::getInstance().getDetailsString().c_str());
 
   core->ActivityManager().UpdateActivity(activity, [](discord::Result result) {});
 
@@ -41,9 +40,7 @@ void init(HMODULE hModule) {
   activity.GetTimestamps().SetStart(time(0));
 
   try {
-    json langJson = buildLangJsonObj(hModule, MAKEINTRESOURCE(IDR_TEXT1));
-    langManager.setJson(langJson);
-
+    LangManager::getInstance().update(buildLangJsonObj(hModule, MAKEINTRESOURCE(IDR_TEXT1)));
     makeCall(0x005814DB, &mainLoopHook);
   } catch (exception e) {}
 }

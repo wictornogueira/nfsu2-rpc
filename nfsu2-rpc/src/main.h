@@ -11,6 +11,3 @@
 #include "config.h"
 #include "utils.h"
 #include "lang.h"
-
-using namespace std;
-using json = nlohmann::json;

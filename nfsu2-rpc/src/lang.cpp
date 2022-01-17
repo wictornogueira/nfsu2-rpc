@@ -1,18 +1,14 @@
 #include "lang.h"
 
-LangManager::LangManager(json &lJson) {
-  langJson = lJson;
-}
+LangManager::LangManager() {}
 
-LangManager::LangManager() {
-}
-
-void LangManager::setJson(json &lJson) {
-  langJson = lJson;
+LangManager& LangManager::getInstance() {
+  static LangManager instance;
+  return instance;
 }
 
 string LangManager::getString(const string &str) {
-  return langJson.value(json::json_pointer(str), "");
+  return m_jsonObj.value(json::json_pointer(str), "");
 }
 
 /*
@@ -108,4 +104,8 @@ string LangManager::getStateString() {
 
 string LangManager::getDetailsString() {
   return replaceAllPlaceHolders(getDetailsTemplate());
+}
+
+void LangManager::update(json j) {
+  m_jsonObj.merge_patch(j);
 }
