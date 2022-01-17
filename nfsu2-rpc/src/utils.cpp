@@ -29,21 +29,19 @@ wstring getModulePath(HMODULE hModule) {
 }
 
 json buildLangJsonObj(HMODULE hModule, LPWSTR lpName) {
-  json langJson;
-
   HRSRC hResInfo;
   HGLOBAL hRes;
   LPVOID memRes;
 
   if (
-    (hResInfo = FindResource(hModule, lpName, L"Text")) == 0 ||
-    (hRes = LoadResource(hModule, hResInfo)) == 0 ||
-    (memRes = LockResource(hRes)) == 0
-    ) {
+      (hResInfo = FindResource(hModule, lpName, L"Text")) == 0 ||
+      (hRes = LoadResource(hModule, hResInfo)) == 0 ||
+      (memRes = LockResource(hRes)) == 0
+  ) {
     throw runtime_error("Could not load internal lang file\n");
   }
 
-  langJson = json::parse((char*)memRes);
+  json langJson = json::parse((char*)memRes);
 
   wstring langPackPath = getModulePath(hModule) + LANG_PACK_FILENAME;
   ifstream langPackFile(langPackPath);

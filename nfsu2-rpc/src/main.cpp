@@ -7,16 +7,14 @@ namespace {
 
 void mainLoopHook() {
 #if FRAME_SKIP > 0
-
   static size_t skippedFrames = 0;
 
   if (skippedFrames != FRAME_SKIP) {
     skippedFrames++;
-    goto runCBacks;
+    goto runCallBacks;
   }
 
   skippedFrames = 0;
-
 #endif
 
   activity.SetState(LangManager::getInstance().getStateString().c_str());
@@ -24,7 +22,7 @@ void mainLoopHook() {
 
   core->ActivityManager().UpdateActivity(activity, [](discord::Result result) {});
 
-  runCBacks:
+  runCallBacks:
   core->RunCallbacks();
 }
 
@@ -35,18 +33,19 @@ void init(HMODULE hModule) {
     return;
   }
 
-  activity.GetAssets().SetLargeImage(IMG_KEY);
-  activity.GetAssets().SetLargeText(IMG_TXT);
-  activity.GetTimestamps().SetStart(time(0));
-
   try {
     LangManager::getInstance().update(buildLangJsonObj(hModule, MAKEINTRESOURCE(IDR_TEXT1)));
+
+    activity.GetAssets().SetLargeImage(IMG_KEY);
+    activity.GetAssets().SetLargeText(IMG_TXT);
+    activity.GetTimestamps().SetStart(time(0));
+
     makeCall(0x005814DB, &mainLoopHook);
-  } catch (exception e) {}
+  } catch (...) {}
 }
 
-// Prevents game from going kaboom
-static DWORD WINAPI ThreadEntry(LPVOID lpParam) {
+// Prevents game from going brrr
+DWORD WINAPI threadInit(LPVOID lpParam) {
   init((HMODULE)lpParam);
   return 0;
 }
@@ -54,8 +53,8 @@ static DWORD WINAPI ThreadEntry(LPVOID lpParam) {
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
   if (ul_reason_for_call == DLL_PROCESS_ATTACH) {
     DisableThreadLibraryCalls(hModule);
-    CreateThread(0, 0, ThreadEntry, hModule, 0, 0);
+    CreateThread(0, 0, threadInit, hModule, 0, 0);
   }
 
-  return TRUE;
+  return 1;
 }
