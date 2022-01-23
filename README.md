@@ -12,7 +12,7 @@ A mod that adds Discord Rich Presence integration to Need for Speed: Underground
 
 ## Customization
 
-Check the [documentation](/docs/customization)
+Check the [documentation](/docs/customization.md)
 
 ## Credits
 
