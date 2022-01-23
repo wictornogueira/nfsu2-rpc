@@ -10,6 +10,11 @@ A mod that adds Discord Rich Presence integration to Need for Speed: Underground
 2. Get the latest version [here](https://github.com/wictornogueira/nfsu2-rpc/releases/latest/download/nfsu2-rpc.zip)
 3. Extract all files to your game directory
 
+## Customization
+
+Check the [documentation](/docs/customization)
+
 ## Credits
+
 - Logo by [TripleZet](https://www.deviantart.com/triplezet)
 - Thanks to [yugecin](https://github.com/yugecin) for reverse engineering the language system
