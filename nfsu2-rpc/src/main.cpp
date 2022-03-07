@@ -1,4 +1,14 @@
-#include "main.h"
+#include "../resource.h"
+#include "config.h"
+#include "utils.h"
+#include "lang.h"
+
+#include <discord/discord.h>
+#include <json.hpp>
+
+#include <ctime>
+#include <string>
+#include <windows.h>
 
 namespace {
   discord::Core* core{};

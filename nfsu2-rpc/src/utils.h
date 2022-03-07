@@ -1,14 +1,9 @@
 #pragma once
 
-#include <fstream>
-#include <locale>
+#include "gamestuff.h"
+#include <json.hpp>
 #include <string>
 #include <Windows.h>
-
-#include "json.hpp"
-
-#include "config.h"
-#include "gamestuff.h"
 
 using namespace std;
 using json = nlohmann::json;
