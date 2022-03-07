@@ -34,7 +34,7 @@ void init(HMODULE hModule) {
   }
 
   try {
-    LangManager::getInstance().update(buildLangJsonObj(hModule, MAKEINTRESOURCE(IDR_TEXT1)));
+    LangManager::getInstance().update(buildLangJsonObj(hModule, MAKEINTRESOURCE(IDR_LANGF)));
 
     activity.GetAssets().SetLargeImage(IMG_KEY);
     activity.GetAssets().SetLargeText(IMG_TXT);

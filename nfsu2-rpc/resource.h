@@ -2,7 +2,7 @@
 // Microsoft Visual C++ generated include file.
 // Used by nfsu2-rpc.rc
 //
-#define IDR_TEXT1                       101
+#define IDR_LANGF                       101
 
 // Next default values for new objects
 // 

@@ -13,10 +13,10 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Portuguese (Brazil) resources
+// Neutral resources resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_PTB)
-LANGUAGE LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 #pragma code_page(1252)
 
 #ifdef APSTUDIO_INVOKED
@@ -50,9 +50,9 @@ END
 // Text
 //
 
-IDR_TEXT1               Text                    "resources\\defaultLang.json"
+IDR_LANGF               Text                    "resources\\defaultLang.json"
 
-#endif    // Portuguese (Brazil) resources
+#endif    // Neutral resources resources
 /////////////////////////////////////////////////////////////////////////////
 
 
